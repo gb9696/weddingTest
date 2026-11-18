@@ -75,7 +75,7 @@ const CONFIG = {
   // (특정 계좌에 kakaopay: "https://qr.kakaopay.com/..." 를 넣으면 그 계좌만 카카오페이 버튼 추가)
 
   // 노란 하트가 천천히 떨어지는 효과 (끄려면 false)
-  effect: true,
+  effect: false,
 
   // 축하 화환 주문 링크 (사용 안 하면 "" 로 비워두기)
   flowerLink: "",
