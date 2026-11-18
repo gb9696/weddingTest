@@ -215,14 +215,11 @@
           location.href = `supertoss://send?amount=0&bank=${encodeURIComponent(a.bank)}&accountNo=${num}`;
         },
       },
-      {
-        label: "카카오페이로 보내기", cls: "kakao",
-        desc: a.kakaopay ? "카카오페이 송금 화면이 열려요" : "계좌번호 복사 후 카카오페이에서 '계좌 송금'",
-        action: () => {
-          if (a.kakaopay) return (location.href = a.kakaopay);
-          copy(`${a.bank} ${a.number}`, "계좌번호를 복사했어요. 카카오페이에서 붙여넣어 주세요.");
-        },
-      },
+      // 카카오페이: 계좌에 송금코드 링크(kakaopay)가 있을 때만 표시
+      ...(a.kakaopay ? [{
+        label: "카카오페이로 보내기", cls: "kakao", desc: "카카오페이 송금 화면이 열려요",
+        action: () => (location.href = a.kakaopay),
+      }] : []),
       { label: "계좌번호 복사", action: () => copy(`${a.bank} ${a.number}`, "계좌번호가 복사되었습니다.") },
     ]);
   });
