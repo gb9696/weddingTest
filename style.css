@@ -171,16 +171,29 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 
 /* 캘린더 추가 */
 .cal-add { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
-.cal-add a { border: 1px solid var(--line); border-radius: 20px; padding: 7px 14px; font-size: 13px; background: #fff; }
+.cal-add button { border: 1px solid #f3dd7a; border-radius: 20px; padding: 9px 20px; font-size: 13px; background: #fffbe6; }
 
 /* 송금 버튼 */
 .acc-btns { display: flex; gap: 4px; flex-shrink: 0; }
 .acc-btns button, .acc-btns .pay { border: 1px solid var(--line); border-radius: 4px; padding: 4px 8px; font-size: 12px; line-height: 1.5; }
-.pay.kakao { background: #fee500; border-color: #fee500; color: #191919; }
-.pay.toss { background: #3182f6; border-color: #3182f6; color: #fff; }
+.acc-btns .pay { background: #fffbe6; border-color: #f3dd7a; }
 
 /* 하트 효과 */
 .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 30; overflow: hidden; max-width: 430px; margin: 0 auto; }
 .hearts i { position: absolute; top: -20px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath fill='%23ffd21f' d='M12 21C9 18.6 1.2 13.7 1 7.4.9 3.6 3.6 1 6.8 1c2.3 0 3.9 1.3 5.2 3.2C13.3 2.3 14.9 1 17.2 1 20.4 1 23.1 3.6 23 7.4 22.8 13.7 15 18.6 12 21z'/%3E%3C/svg%3E") center/contain no-repeat; animation-name: fall, sway; animation-timing-function: linear, ease-in-out; animation-iteration-count: 1, infinite; animation-direction: normal, alternate; }
 @keyframes fall { to { top: 105%; } }
 @keyframes sway { from { transform: translateX(calc(var(--sway) * -1)) rotate(calc(var(--rot) * -1)); } to { transform: translateX(var(--sway)) rotate(var(--rot)); } }
+
+/* 하단 선택 창 */
+.sheet { position: fixed; inset: 0; z-index: 55; background: rgba(0,0,0,.4); display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.sheet.open { opacity: 1; pointer-events: auto; }
+.sheet-box { width: 100%; max-width: 430px; background: #fff; border-radius: 18px 18px 0 0; padding: 22px 20px calc(16px + env(safe-area-inset-bottom)); transform: translateY(100%); transition: transform .3s ease; text-align: center; }
+.sheet.open .sheet-box { transform: none; }
+.sheet-title { font-size: 16px; font-weight: 700; }
+.sheet-sub { font-size: 13px; color: var(--sub); margin: 2px 0 16px; }
+.sheet-list { display: flex; flex-direction: column; gap: 8px; }
+.sheet-item { display: flex; flex-direction: column; align-items: center; padding: 12px; border-radius: 10px; background: #f6f4f0; font-size: 15px; }
+.sheet-item small { font-size: 11.5px; color: var(--sub); margin-top: 1px; }
+.sheet-item.toss { background: #3182f6; color: #fff; } .sheet-item.toss small { color: #dbe8ff; }
+.sheet-item.kakao { background: #fee500; color: #191919; } .sheet-item.kakao small { color: #5c5300; }
+.sheet-cancel { margin-top: 12px; font-size: 14px; color: var(--sub); padding: 8px; }

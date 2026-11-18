@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Yellowtail&family=Sacramento&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=202611181122" />
+  <link rel="stylesheet" href="style.css?v=202611181127" />
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute">
@@ -66,10 +66,7 @@
       </div>
       <div class="countdown" id="countdown"></div>
       <p class="dday" id="dday"></p>
-      <div class="cal-add">
-        <a href="wedding.ics" download="wedding.ics">📅 캘린더에 추가</a>
-        <a id="calGoogle" target="_blank" rel="noopener">구글 캘린더에 추가</a>
-      </div>
+      <div class="cal-add"><button id="calAdd">📅 캘린더에 일정 추가</button></div>
       <div class="parents" id="parents"></div>
       <button class="btn-outline" data-open="contactModal">연락하기</button>
     </section>
@@ -145,10 +142,20 @@
   <button class="bgm-btn" id="bgmBtn" aria-label="배경음악">♪</button>
   <audio id="bgm" loop></audio>
   <div class="toast" id="toast"></div>
+
+  <!-- 하단 선택 창 (송금 / 캘린더) -->
+  <div class="sheet" id="sheet">
+    <div class="sheet-box">
+      <p class="sheet-title" id="sheetTitle"></p>
+      <p class="sheet-sub" id="sheetSub"></p>
+      <div class="sheet-list" id="sheetList"></div>
+      <button class="sheet-cancel" data-close>닫기</button>
+    </div>
+  </div>
   <div class="hearts" id="hearts" aria-hidden="true"></div>
 
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
-  <script src="config.js?v=202611181124"></script>
-  <script src="script.js?v=202611181122"></script>
+  <script src="config.js?v=202611181127"></script>
+  <script src="script.js?v=202611181127"></script>
 </body>
 </html>

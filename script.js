@@ -103,15 +103,6 @@
   };
   tick(); setInterval(tick, 1000);
 
-  /* 캘린더에 일정 추가 */
-  const title = `${C.groom.name} ♥ ${C.bride.name} 결혼식`;
-  const place = `${V.name} ${V.floor || ""} ${V.hall} (${V.address})`;
-  const stamp = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-  const end = new Date(wedding.getTime() + 2 * 36e5);
-  $("calGoogle").href = "https://calendar.google.com/calendar/render?action=TEMPLATE"
-    + `&text=${encodeURIComponent(title)}&dates=${stamp(wedding)}/${stamp(end)}&ctz=Asia/Seoul`
-    + `&location=${encodeURIComponent(place)}&details=${encodeURIComponent(location.href.split("?")[0])}`;
-
   /* 오시는 길 */
   $("venueName").textContent = [V.name, V.floor, V.hall].filter(Boolean).join(" ");
   $("venueAddr").innerHTML = `${V.address}<br>Tel. <a href="tel:${V.tel}">${V.tel}</a>`;
@@ -160,14 +151,12 @@
   $("transport").innerHTML = V.transport.map((t) => `<div><h4>${t.title}</h4><p>${t.desc}</p></div>`).join("");
 
   /* 계좌 */
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const accBlock = (el, title, list) => {
     el.innerHTML = `<button class="acc-head">${title}</button><div class="acc-body">${list.map((a) => `
       <div class="acc-item"><p><small>${a.role}</small> ${a.name}<br>${a.bank} ${a.number}</p>
       <div class="acc-btns">
         <button data-copy="${a.bank} ${a.number}">복사</button>
-        ${a.kakaopay ? `<a class="pay kakao" href="${a.kakaopay}" target="_blank" rel="noopener">카카오페이</a>` : ""}
-        ${C.tossButton !== false && isMobile ? `<a class="pay toss" href="supertoss://send?amount=0&bank=${encodeURIComponent(a.bank)}&accountNo=${a.number.replace(/\D/g, "")}">토스</a>` : ""}
+        <button class="pay" data-pay="${encodeURIComponent(JSON.stringify(a))}">송금</button>
       </div></div>`).join("")}</div>`;
     el.querySelector(".acc-head").onclick = () => el.classList.toggle("open");
   };
@@ -182,6 +171,82 @@
     toast(msg);
   };
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-copy]"); if (b) copy(b.dataset.copy, "계좌번호가 복사되었습니다."); });
+  /* 하단 선택 창 */
+  const UA = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(UA);
+  const isMobile = isIOS || isAndroid;
+  const inKakao = /KAKAOTALK/i.test(UA);
+  const sheet = $("sheet");
+  const openSheet = (title, sub, items) => {
+    $("sheetTitle").textContent = title;
+    $("sheetSub").innerHTML = sub || "";
+    $("sheetList").innerHTML = "";
+    items.forEach((it) => {
+      const b = document.createElement("button");
+      b.className = `sheet-item ${it.cls || ""}`;
+      b.innerHTML = `<span>${it.label}</span>${it.desc ? `<small>${it.desc}</small>` : ""}`;
+      b.onclick = () => { sheet.classList.remove("open"); it.action(); };
+      $("sheetList").appendChild(b);
+    });
+    sheet.classList.add("open");
+  };
+  sheet.addEventListener("click", (e) => { if (e.target === sheet || e.target.hasAttribute("data-close")) sheet.classList.remove("open"); });
+  const absUrl = (p) => new URL(p, location.href).href;
+  // 카카오톡 안에서 열린 경우 외부 브라우저로 열기 (파일·앱 연결이 막히는 경우가 있음)
+  const openOut = (url) => {
+    if (inKakao) location.href = "kakaotalk://web/openExternal?url=" + encodeURIComponent(absUrl(url));
+    else location.href = url;
+  };
+
+  /* 송금 선택 */
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-pay]");
+    if (!b) return;
+    const a = JSON.parse(decodeURIComponent(b.dataset.pay));
+    const num = a.number.replace(/\D/g, "");
+    openSheet(`${a.role} ${a.name}님께 송금`, `${a.bank} ${a.number}`, [
+      {
+        label: "토스로 보내기", cls: "toss",
+        desc: isMobile ? "토스 앱 송금 화면이 열려요" : "휴대폰에서 이용할 수 있어요",
+        action: () => {
+          if (!isMobile) return toast("휴대폰에서 이용할 수 있어요.");
+          copy(`${a.bank} ${a.number}`, "계좌번호도 복사해 두었어요.");
+          location.href = `supertoss://send?amount=0&bank=${encodeURIComponent(a.bank)}&accountNo=${num}`;
+        },
+      },
+      {
+        label: "카카오페이로 보내기", cls: "kakao",
+        desc: a.kakaopay ? "카카오페이 송금 화면이 열려요" : "계좌번호 복사 후 카카오페이에서 '계좌 송금'",
+        action: () => {
+          if (a.kakaopay) return (location.href = a.kakaopay);
+          copy(`${a.bank} ${a.number}`, "계좌번호를 복사했어요. 카카오페이에서 붙여넣어 주세요.");
+        },
+      },
+      { label: "계좌번호 복사", action: () => copy(`${a.bank} ${a.number}`, "계좌번호가 복사되었습니다.") },
+    ]);
+  });
+
+  /* 캘린더에 일정 추가 */
+  const calTitle = `${C.groom.name} ♥ ${C.bride.name} 결혼식`;
+  const calPlace = `${V.name} ${V.floor || ""} ${V.hall} (${V.address})`;
+  const stamp = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+  const calEnd = new Date(wedding.getTime() + 2 * 36e5);
+  const googleCal = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + `&text=${encodeURIComponent(calTitle)}&dates=${stamp(wedding)}/${stamp(calEnd)}&ctz=Asia/Seoul`
+    + `&location=${encodeURIComponent(calPlace)}&details=${encodeURIComponent(location.href.split("?")[0])}`;
+  $("calAdd").onclick = () => {
+    if (isIOS) return openOut("wedding.ics");   // 아이폰: 캘린더 앱 '추가' 화면이 바로 열림
+    openSheet("캘린더에 일정 추가", `${year}년 ${month}월 ${day}일 ${DAYS[dow]}요일 ${timeKo}`, [
+      {
+        label: isAndroid ? "휴대폰 기본 캘린더 (삼성 캘린더 등)" : "캘린더 파일 받기 (Outlook·Mac 등)",
+        desc: isAndroid ? "파일을 받은 뒤 열기를 누르면 일정이 추가돼요" : "",
+        action: () => openOut("wedding.ics"),
+      },
+      { label: "구글 캘린더", desc: "구글 계정 캘린더에 바로 추가", action: () => openOut(googleCal) },
+    ]);
+  };
+
   $("copyLink").onclick = () => copy(location.href.split("?")[0], "청첩장 링크가 복사되었습니다.");
 
   /* 화환 */
