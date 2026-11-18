@@ -41,18 +41,28 @@
   /* 갤러리 (3열 바둑판, 누르면 크게 보기) */
   const gal = $("gallery");
   const FIRST = C.galleryFirst || 9;   // 처음에 보여줄 사진 수
-  C.gallery.forEach((src, i) => {
-    const f = document.createElement("figure");
-    if (i >= FIRST) f.className = "more";
-    const img = document.createElement("img");
-    img.src = src; img.loading = "lazy"; img.alt = `사진 ${i + 1}`;
-    fallback(img);
-    f.onclick = () => openLB(i);
-    f.appendChild(img); gal.appendChild(f);
-  });
-  if (C.gallery.length > FIRST) {
-    $("galMore").onclick = () => { gal.classList.add("all"); $("galMore").remove(); };
-  } else $("galMore").remove();
+  const renderGallery = (list) => {
+    C.gallery = list;
+    gal.innerHTML = "";
+    gal.classList.remove("all");
+    list.forEach((src, i) => {
+      const f = document.createElement("figure");
+      if (i >= FIRST) f.className = "more";
+      const img = document.createElement("img");
+      img.src = src; img.loading = "lazy"; img.alt = `사진 ${i + 1}`;
+      fallback(img);
+      f.onclick = () => openLB(i);
+      f.appendChild(img); gal.appendChild(f);
+    });
+    $("galMore").style.display = list.length > FIRST ? "" : "none";
+  };
+  $("galMore").onclick = () => { gal.classList.add("all"); $("galMore").style.display = "none"; };
+  renderGallery(C.gallery);
+  // 관리 페이지(admin.html)에서 올린 사진이 있으면 그 사진들로 교체
+  fetch("/api/photos")
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => { if (d && d.photos && d.photos.length) renderGallery(d.photos.map((p) => p.url)); })
+    .catch(() => {});
 
   /* 라이트박스 */
   let cur = 0;

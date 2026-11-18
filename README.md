@@ -28,3 +28,14 @@ images/      main.jpg, gallery1~8.jpg, map.jpg(선택)
 4. JavaScript 키를 `config.js`의 `kakaoKey`에 입력
 
 > 카카오톡 미리보기가 예전 내용으로 뜨면 https://developers.kakao.com/tool/debugger/sharing 에서 URL 캐시를 초기화하세요.
+
+## 사진첩 관리 페이지 (admin.html)
+청첩장 주소 뒤에 `/admin.html` 을 붙여 들어가면 사진을 직접 올리고 지울 수 있어요.
+
+처음 한 번 Vercel 설정:
+1. Vercel 프로젝트 → **Storage** → **Create** → **Blob** → 이 프로젝트에 연결 (BLOB_READ_WRITE_TOKEN 자동 등록)
+2. Vercel 프로젝트 → **Settings → Environment Variables** → `ADMIN_PASSWORD` 에 관리 비밀번호 입력
+3. **Deployments** 에서 최신 배포를 **Redeploy**
+
+- 올린 사진이 하나라도 있으면 사진첩은 그 사진들로 표시되고, 없으면 `config.js`의 `gallery` 사진이 보여요.
+- 사진은 올릴 때 긴 쪽 1600px JPEG로 자동으로 줄어들어요.
