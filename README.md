@@ -19,7 +19,7 @@ images/      main.jpg, gallery1~8.jpg, map.jpg(선택)
 1. GitHub에서 새 저장소 생성 (예: `wedding`, Public)
 2. 이 폴더의 파일을 전부 업로드 (Add file → Upload files 또는 git push)
 3. 저장소 **Settings → Pages → Branch: main / (root) → Save**
-4. 1~2분 뒤 `https://gb9696.github.io/weddingTest/` 으로 접속
+4. 1~2분 뒤 `https://wedding-two-blue.vercel.app/` 으로 접속
 
 ## 카카오톡 공유 설정 (선택)
 1. https://developers.kakao.com → 내 애플리케이션 → 앱 추가

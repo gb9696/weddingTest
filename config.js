@@ -75,7 +75,7 @@ const CONFIG = {
   // 플랫폼 > Web 사이트 도메인에 GitHub Pages 주소 등록 필요
   kakaoKey: "",
   // 공유 썸네일 (반드시 https 전체 주소)
-  shareImage: "https://gb9696.github.io/weddingTest/images/main.jpg",
+  shareImage: "https://wedding-two-blue.vercel.app/images/main.jpg",
 
   // 배경음악 (선택). images 폴더가 아닌 루트에 bgm.mp3 넣고 "bgm.mp3"로 지정
   bgm: "",
