@@ -233,16 +233,20 @@
     + `&text=${encodeURIComponent(calTitle)}&dates=${stamp(wedding)}/${stamp(calEnd)}&ctz=Asia/Seoul`
     + `&location=${encodeURIComponent(calPlace)}&details=${encodeURIComponent(location.href.split("?")[0])}`;
   $("calAdd").onclick = () => {
-    if (isIOS) return openOut("wedding.ics");   // 아이폰: 캘린더 앱 '추가' 화면이 바로 열림
+    if (isIOS) return openOut("wedding.ics");     // 아이폰: 기본 캘린더 '추가' 화면이 바로 열림
+    if (isAndroid) return openOut(googleCal);     // 안드로이드: 구글 캘린더로 바로 (삼성 캘린더에도 동기화)
     openSheet("캘린더에 일정 추가", `${year}년 ${month}월 ${day}일 ${DAYS[dow]}요일 ${timeKo}`, [
-      {
-        label: isAndroid ? "휴대폰 기본 캘린더 (삼성 캘린더 등)" : "캘린더 파일 받기 (Outlook·Mac 등)",
-        desc: isAndroid ? "파일을 받은 뒤 열기를 누르면 일정이 추가돼요" : "",
-        action: () => openOut("wedding.ics"),
-      },
       { label: "구글 캘린더", desc: "구글 계정 캘린더에 바로 추가", action: () => openOut(googleCal) },
+      { label: "캘린더 파일 받기", desc: "Outlook·Mac 캘린더 등", action: () => openOut("wedding.ics") },
     ]);
   };
+  // 안드로이드에서 구글 캘린더를 안 쓰는 경우를 위한 보조 링크
+  if (isAndroid) {
+    const alt = document.createElement("a");
+    alt.className = "cal-alt"; alt.textContent = "다른 캘린더 앱은 파일로 받기";
+    alt.href = "#"; alt.onclick = (e) => { e.preventDefault(); openOut("wedding.ics"); };
+    $("calAdd").parentNode.after(alt);
+  }
 
   $("copyLink").onclick = () => copy(location.href.split("?")[0], "청첩장 링크가 복사되었습니다.");
 
