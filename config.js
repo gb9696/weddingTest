@@ -1,28 +1,82 @@
-// 이 파일만 수정해도 대부분의 청첩장 내용을 변경할 수 있습니다.
-window.WEDDING = {
-  couple: { groom: '민준', bride: '서연' },
-  weddingDate: '2027-05-15T12:30:00+09:00',
-  dateDisplay: '2027년 5월 15일 토요일',
-  timeDisplay: '오후 12시 30분',
-  venue: { name: '라온웨딩홀', hall: '그랜드홀 3층', address: '서울특별시 강남구 테헤란로 123', query: '라온웨딩홀 서울' },
-  message: ['서로의 일상에 조용히 스며든 두 사람이', '이제 같은 장면을 바라보며 걸어가려 합니다.', '저희의 새로운 시작을 함께해 주세요.'],
-  parents: { groom: '아버지 · 어머니의 아들', bride: '아버지 · 어머니의 딸' },
-  accounts: [
-    { label: '신랑 측', bank: 'OO은행', number: '123-456-789012', holder: '김민준' },
-    { label: '신부 측', bank: 'OO은행', number: '987-654-321098', holder: '이서연' }
-  ],
-  // 사진을 images 폴더에 넣고 경로를 변경하세요. 파일이 없으면 안내용 플레이스홀더가 표시됩니다.
-  heroImage: '', // 예: 'images/main.jpg'
+/* =========================================================
+ *  청첩장 정보 설정 파일
+ *  이 파일만 수정하면 청첩장 내용이 모두 바뀝니다.
+ * ========================================================= */
+const CONFIG = {
+  // 예식 일시 (24시간제)
+  date: { year: 2027, month: 2, day: 20, hour: 11, minute: 10 },
+
+  groom: {
+    name: "박근범",
+    order: "차남",
+    father: { name: "박무용", phone: "010-0000-0000" },
+    mother: { name: "이태순", phone: "010-0000-0000" },
+    phone: "010-0000-0000",
+  },
+  bride: {
+    name: "이지현",
+    order: "장녀",
+    father: { name: "이경석", phone: "010-0000-0000" },
+    mother: { name: "김향신", phone: "010-0000-0000" },
+    phone: "010-0000-0000",
+  },
+
+  // 인사말 (줄바꿈은 \n)
+  greeting:
+    "저희 두 사람이 하나가 되는\n뜻 깊은 날에\n소중한 걸음 하시어 함께 해주시어\n자리를 빛내 주세요.",
+
+  // 메인 사진 위 노란 손글씨·하트 장식
+  // 사진에 이미 글씨가 들어가 있다면 false로 바꾸세요
+  heroDeco: true,
+
+  // 사진 (images 폴더에 넣고 파일명 맞추기)
+  mainPhoto: "images/main.jpg",
   gallery: [
-    { src: '', alt: '첫 번째 사진' },
-    { src: '', alt: '두 번째 사진' },
-    { src: '', alt: '세 번째 사진' },
-    { src: '', alt: '네 번째 사진' },
-    { src: '', alt: '다섯 번째 사진' },
-    { src: '', alt: '여섯 번째 사진' }
+    "images/gallery1.jpg", "images/gallery2.jpg", "images/gallery3.jpg", "images/gallery4.jpg",
+    "images/gallery5.jpg", "images/gallery6.jpg", "images/gallery7.jpg", "images/gallery8.jpg",
   ],
-  // Kakao Developers JavaScript 키를 등록한 경우에만 SDK 공유를 사용합니다.
-  kakaoJavaScriptKey: '',
-  // 공개 URL을 배포 후 입력하면 공유 주소를 고정할 수 있습니다. 비워두면 현재 주소 사용.
-  siteUrl: ''
+
+  venue: {
+    name: "웨스턴베니비스신도림",
+    floor: "7층",
+    hall: "그레이스홀",
+    address: "서울특별시 OO구 OO로 123",
+    tel: "02-000-0000",
+    // 지도 링크: 각 지도 앱에서 장소 검색 후 '공유 > 링크 복사'한 주소로 바꾸세요
+    naverMap: "https://map.naver.com/",
+    kakaoMap: "https://map.kakao.com/",
+    tmap: "https://tmap.life/",
+    // 지도 이미지(선택). 캡처한 약도를 images/map.jpg로 넣으면 표시됩니다
+    mapImage: "images/map.jpg",
+    transport: [
+      { title: "지하철", desc: "2호선 OO역 3번 출구 도보 5분" },
+      { title: "버스", desc: "간선 000, 000 / 지선 0000\nOO웨딩홀 정류장 하차" },
+      { title: "주차", desc: "건물 지하 주차장 이용 (2시간 무료)" },
+    ],
+  },
+
+  accounts: {
+    groom: [
+      { role: "신랑", name: "박근범", bank: "신한은행", number: "000-000-000000" },
+      { role: "신랑 아버지", name: "박무용", bank: "국민은행", number: "000000-00-000000" },
+      { role: "신랑 어머니", name: "이태순", bank: "우리은행", number: "0000-000-000000" },
+    ],
+    bride: [
+      { role: "신부", name: "이지현", bank: "카카오뱅크", number: "3333-00-0000000" },
+      { role: "신부 아버지", name: "이경석", bank: "하나은행", number: "000-000000-00000" },
+      { role: "신부 어머니", name: "김향신", bank: "농협", number: "000-0000-0000-00" },
+    ],
+  },
+
+  // 축하 화환 주문 링크 (사용 안 하면 "" 로 비워두기)
+  flowerLink: "",
+
+  // 카카오톡 공유: https://developers.kakao.com 에서 앱 생성 후 JavaScript 키 입력
+  // 플랫폼 > Web 사이트 도메인에 GitHub Pages 주소 등록 필요
+  kakaoKey: "",
+  // 공유 썸네일 (반드시 https 전체 주소)
+  shareImage: "https://gb9696.github.io/weddingTest/images/main.jpg",
+
+  // 배경음악 (선택). images 폴더가 아닌 루트에 bgm.mp3 넣고 "bgm.mp3"로 지정
+  bgm: "",
 };
