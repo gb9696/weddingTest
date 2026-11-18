@@ -165,3 +165,5 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 @keyframes spin { to { transform: rotate(360deg); } }
 .toast { position: fixed; bottom: 40px; left: 50%; transform: translate(-50%, 20px); background: rgba(40,40,40,.88); color: #fff; padding: 10px 20px; border-radius: 20px; font-size: 13px; opacity: 0; transition: .3s; pointer-events: none; z-index: 60; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+.map-btns { border-top: 1px solid var(--line); }
+.venue-addr + .map-btns { margin-top: 24px; }

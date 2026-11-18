@@ -108,10 +108,11 @@
   $("venueAddr").innerHTML = `${V.address}<br>Tel. <a href="tel:${V.tel}">${V.tel}</a>`;
   $("naverMap").href = V.naverMap; $("kakaoMap").href = V.kakaoMap; $("tmap").href = V.tmap;
   const mapBox = $("mapBox");
-  if (V.mapImage) {
+  if (!V.mapImage) mapBox.remove();
+  else {
     const test = new Image();
     test.onload = () => (mapBox.style.backgroundImage = `url(${V.mapImage})`);
-    test.onerror = () => (mapBox.textContent = "약도 이미지를 images/map.jpg 로 넣어주세요");
+    test.onerror = () => mapBox.remove();
     test.src = V.mapImage;
   }
   $("transport").innerHTML = V.transport.map((t) => `<div><h4>${t.title}</h4><p>${t.desc}</p></div>`).join("");

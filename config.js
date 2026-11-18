@@ -40,18 +40,18 @@ const CONFIG = {
     name: "웨스턴베니비스신도림",
     floor: "7층",
     hall: "그레이스홀",
-    address: "서울특별시 OO구 OO로 123",
-    tel: "02-000-0000",
-    // 지도 링크: 각 지도 앱에서 장소 검색 후 '공유 > 링크 복사'한 주소로 바꾸세요
-    naverMap: "https://map.naver.com/",
-    kakaoMap: "https://map.kakao.com/",
-    tmap: "https://tmap.life/",
-    // 지도 이미지(선택). 캡처한 약도를 images/map.jpg로 넣으면 표시됩니다
-    mapImage: "images/map.jpg?v=202611180952",
+    address: "서울특별시 구로구 새말로 97 신도림테크노마트 7층",
+    tel: "02-2111-7000",
+    // 지도 앱 바로가기 (검색 결과로 연결)
+    naverMap: "https://map.naver.com/p/search/" + encodeURIComponent("웨스턴베니비스 신도림"),
+    kakaoMap: "https://map.kakao.com/link/search/" + encodeURIComponent("웨스턴베니비스 신도림"),
+    tmap: "tmap://search?name=" + encodeURIComponent("웨스턴베니비스 신도림"),
+    // 약도 이미지(선택). images/map.jpg 로 넣으면 표시되고, 없으면 영역이 숨겨집니다
+    mapImage: "images/map.jpg",
     transport: [
-      { title: "지하철", desc: "2호선 OO역 3번 출구 도보 5분" },
-      { title: "버스", desc: "간선 000, 000 / 지선 0000\nOO웨딩홀 정류장 하차" },
-      { title: "주차", desc: "건물 지하 주차장 이용 (2시간 무료)" },
+      { title: "지하철", desc: "1·2호선 신도림역 2번 또는 3번 출구\n테크노마트 판매동 지하 1층과 바로 연결" },
+      { title: "버스", desc: "간선·광역·일반: 160, 600, 662, 10\n지선: 5619, 6411, 6511, 6512" },
+      { title: "주차", desc: "신도림테크노마트 주차장 이용 (하객 3시간 무료)" },
     ],
   },
 
