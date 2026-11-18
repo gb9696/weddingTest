@@ -108,13 +108,46 @@
   $("venueAddr").innerHTML = `${V.address}<br>Tel. <a href="tel:${V.tel}">${V.tel}</a>`;
   $("naverMap").href = V.naverMap; $("kakaoMap").href = V.kakaoMap; $("tmap").href = V.tmap;
   const mapBox = $("mapBox");
-  if (!V.mapImage) mapBox.remove();
-  else {
+  // 약도 이미지 (카카오맵을 못 불러올 때 대신 사용)
+  const useImage = () => {
+    if (!V.mapImage) return mapBox.remove();
     const test = new Image();
     test.onload = () => (mapBox.style.backgroundImage = `url(${V.mapImage})`);
     test.onerror = () => mapBox.remove();
     test.src = V.mapImage;
-  }
+  };
+  // 카카오맵
+  const drawKakaoMap = () => {
+    kakao.maps.load(() => {
+      mapBox.textContent = "";
+      const map = new kakao.maps.Map(mapBox, { center: new kakao.maps.LatLng(V.lat, V.lng), level: 3 });
+      map.setDraggable(false);   // 페이지 스크롤이 지도에 막히지 않도록 고정
+      map.setZoomable(false);
+      map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+      const place = (pos) => {
+        map.setCenter(pos);
+        new kakao.maps.Marker({ map, position: pos });
+        new kakao.maps.CustomOverlay({
+          map, position: pos, yAnchor: 2.6,
+          content: `<div class="map-label">${V.name}</div>`,
+        });
+      };
+      // 주소로 정확한 위치를 찾고, 실패하면 config의 좌표 사용
+      const fallback = new kakao.maps.LatLng(V.lat, V.lng);
+      if (kakao.maps.services) {
+        new kakao.maps.services.Geocoder().addressSearch(V.address.replace(/\s*신도림테크노마트.*$/, ""), (r, status) => {
+          place(status === kakao.maps.services.Status.OK ? new kakao.maps.LatLng(r[0].y, r[0].x) : fallback);
+        });
+      } else place(fallback);
+    });
+  };
+  if (C.kakaoKey) {
+    const s = document.createElement("script");
+    s.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${C.kakaoKey}&autoload=false&libraries=services`;
+    s.onload = () => { try { drawKakaoMap(); } catch { useImage(); } };
+    s.onerror = useImage;
+    document.head.appendChild(s);
+  } else useImage();
   $("transport").innerHTML = V.transport.map((t) => `<div><h4>${t.title}</h4><p>${t.desc}</p></div>`).join("");
 
   /* 계좌 */

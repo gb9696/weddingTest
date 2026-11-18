@@ -42,6 +42,9 @@ const CONFIG = {
     hall: "그레이스홀",
     address: "서울특별시 구로구 새말로 97 신도림테크노마트 7층",
     tel: "02-2111-7000",
+    // 지도 중심 좌표 (주소로 위치를 못 찾을 때만 사용)
+    lat: 37.5072,
+    lng: 126.8903,
     // 지도 앱 바로가기 (검색 결과로 연결)
     naverMap: "https://map.naver.com/p/search/" + encodeURIComponent("웨스턴베니비스 신도림"),
     kakaoMap: "https://map.kakao.com/link/search/" + encodeURIComponent("웨스턴베니비스 신도림"),
