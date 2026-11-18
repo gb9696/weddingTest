@@ -232,9 +232,29 @@
   const googleCal = "https://calendar.google.com/calendar/render?action=TEMPLATE"
     + `&text=${encodeURIComponent(calTitle)}&dates=${stamp(wedding)}/${stamp(calEnd)}&ctz=Asia/Seoul`
     + `&location=${encodeURIComponent(calPlace)}&details=${encodeURIComponent(location.href.split("?")[0])}`;
+  const isSamsung = isAndroid && /SM-|SAMSUNG|SamsungBrowser/i.test(UA);
+  const samsungIntent = "intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.item/event;"
+    + "package=com.samsung.android.calendar;"
+    + `S.title=${encodeURIComponent(calTitle)};S.eventLocation=${encodeURIComponent(calPlace)};`
+    + `l.beginTime=${wedding.getTime()};l.endTime=${calEnd.getTime()};`
+    + `S.browser_fallback_url=${encodeURIComponent(googleCal)};end`;
   $("calAdd").onclick = () => {
     if (isIOS) return openOut("wedding.ics");     // 아이폰: 기본 캘린더 '추가' 화면이 바로 열림
-    if (isAndroid) return openOut(googleCal);     // 안드로이드: 구글 캘린더로 바로 (삼성 캘린더에도 동기화)
+    if (isAndroid) {
+      // 갤럭시: 삼성 캘린더 '일정 추가' 화면을 먼저 시도하고, 열리지 않으면 구글 캘린더로
+      if (isSamsung) {
+        let left = false;
+        const mark = () => { if (document.hidden) left = true; };
+        document.addEventListener("visibilitychange", mark);
+        location.href = samsungIntent;
+        setTimeout(() => {
+          document.removeEventListener("visibilitychange", mark);
+          if (!left && !document.hidden) openOut(googleCal);
+        }, 1500);
+        return;
+      }
+      return openOut(googleCal);                   // 그 외 안드로이드: 구글 캘린더로 바로
+    }
     openSheet("캘린더에 일정 추가", `${year}년 ${month}월 ${day}일 ${DAYS[dow]}요일 ${timeKo}`, [
       { label: "구글 캘린더", desc: "구글 계정 캘린더에 바로 추가", action: () => openOut(googleCal) },
       { label: "캘린더 파일 받기", desc: "Outlook·Mac 캘린더 등", action: () => openOut("wedding.ics") },
