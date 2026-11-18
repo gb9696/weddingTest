@@ -60,7 +60,7 @@ const CONFIG = {
 
   accounts: {
     groom: [
-      { role: "신랑", name: "박근범", bank: "신한은행", number: "000-000-000000" },
+      { role: "신랑", name: "박근범", bank: "우리은행", number: "1002-762-431397" },
       { role: "신랑 아버지", name: "박무용", bank: "국민은행", number: "000000-00-000000" },
       { role: "신랑 어머니", name: "이태순", bank: "우리은행", number: "0000-000-000000" },
     ],
