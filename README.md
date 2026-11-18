@@ -21,10 +21,10 @@ images/      main.jpg, gallery1~8.jpg, map.jpg(선택)
 3. 저장소 **Settings → Pages → Branch: main / (root) → Save**
 4. 1~2분 뒤 `https://wedding-two-blue.vercel.app/` 으로 접속
 
-## 카카오톡 공유 설정 (선택)
-1. https://developers.kakao.com → 내 애플리케이션 → 앱 추가
-2. 앱 설정 → 플랫폼 → Web → 사이트 도메인에 `https://아이디.github.io` 등록
-3. 앱 키의 **JavaScript 키**를 `config.js`의 `kakaoKey`에 입력
-4. `shareImage`를 실제 배포 주소의 사진 경로로 변경
+## 카카오톡 공유 설정 (완료)
+1. https://developers.kakao.com → 앱 관리에서 앱 생성
+2. [앱] > [플랫폼 키] > [JavaScript 키] → JavaScript SDK 도메인에 `https://wedding-two-blue.vercel.app` 등록
+3. [앱] > [제품 링크 관리] → 웹 도메인에 `https://wedding-two-blue.vercel.app` 등록
+4. JavaScript 키를 `config.js`의 `kakaoKey`에 입력
 
 > 카카오톡 미리보기가 예전 내용으로 뜨면 https://developers.kakao.com/tool/debugger/sharing 에서 URL 캐시를 초기화하세요.
