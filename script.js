@@ -103,6 +103,15 @@
   };
   tick(); setInterval(tick, 1000);
 
+  /* 캘린더에 일정 추가 */
+  const title = `${C.groom.name} ♥ ${C.bride.name} 결혼식`;
+  const place = `${V.name} ${V.floor || ""} ${V.hall} (${V.address})`;
+  const stamp = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+  const end = new Date(wedding.getTime() + 2 * 36e5);
+  $("calGoogle").href = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + `&text=${encodeURIComponent(title)}&dates=${stamp(wedding)}/${stamp(end)}&ctz=Asia/Seoul`
+    + `&location=${encodeURIComponent(place)}&details=${encodeURIComponent(location.href.split("?")[0])}`;
+
   /* 오시는 길 */
   $("venueName").textContent = [V.name, V.floor, V.hall].filter(Boolean).join(" ");
   $("venueAddr").innerHTML = `${V.address}<br>Tel. <a href="tel:${V.tel}">${V.tel}</a>`;
@@ -151,10 +160,15 @@
   $("transport").innerHTML = V.transport.map((t) => `<div><h4>${t.title}</h4><p>${t.desc}</p></div>`).join("");
 
   /* 계좌 */
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const accBlock = (el, title, list) => {
     el.innerHTML = `<button class="acc-head">${title}</button><div class="acc-body">${list.map((a) => `
       <div class="acc-item"><p><small>${a.role}</small> ${a.name}<br>${a.bank} ${a.number}</p>
-      <button data-copy="${a.bank} ${a.number}">복사</button></div>`).join("")}</div>`;
+      <div class="acc-btns">
+        <button data-copy="${a.bank} ${a.number}">복사</button>
+        ${a.kakaopay ? `<a class="pay kakao" href="${a.kakaopay}" target="_blank" rel="noopener">카카오페이</a>` : ""}
+        ${C.tossButton !== false && isMobile ? `<a class="pay toss" href="supertoss://send?amount=0&bank=${encodeURIComponent(a.bank)}&accountNo=${a.number.replace(/\D/g, "")}">토스</a>` : ""}
+      </div></div>`).join("")}</div>`;
     el.querySelector(".acc-head").onclick = () => el.classList.toggle("open");
   };
   accBlock($("accGroom"), "신랑측 계좌번호", C.accounts.groom);
@@ -195,6 +209,24 @@
     const audio = $("bgm"), btn = $("bgmBtn");
     audio.src = C.bgm; btn.style.display = "block";
     btn.onclick = () => { if (audio.paused) { audio.play(); btn.classList.add("on"); } else { audio.pause(); btn.classList.remove("on"); } };
+  }
+
+  /* 하트 날리는 효과 */
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (C.effect !== false && !reduce) {
+    const box = $("hearts");
+    const spawn = () => {
+      if (document.hidden || box.childElementCount > 14) return;
+      const h = document.createElement("i");
+      const size = 8 + Math.random() * 10;
+      const dur = 8 + Math.random() * 6;
+      h.style.cssText = `left:${Math.random() * 100}%;width:${size}px;height:${size * 0.92}px;`
+        + `animation-duration:${dur}s,${2.5 + Math.random() * 2}s;opacity:${0.45 + Math.random() * 0.4};`
+        + `--sway:${(Math.random() * 40 - 20).toFixed(0)}px;--rot:${(Math.random() * 60 - 30).toFixed(0)}deg`;
+      h.addEventListener("animationend", (e) => { if (e.animationName === "fall") h.remove(); });
+      box.appendChild(h);
+    };
+    setInterval(spawn, 900);
   }
 
   /* 스크롤 페이드인 */

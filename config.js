@@ -71,6 +71,15 @@ const CONFIG = {
     ],
   },
 
+  // 송금 버튼
+  // - 토스: 휴대폰에서 각 계좌 옆에 자동 표시 (끄려면 false)
+  // - 카카오페이: 계좌마다 kakaopay: "https://qr.kakaopay.com/..." 를 넣으면 표시
+  //   (카카오페이 앱 > 송금 > 송금코드(QR) > 링크 복사)
+  tossButton: true,
+
+  // 노란 하트가 천천히 떨어지는 효과 (끄려면 false)
+  effect: true,
+
   // 축하 화환 주문 링크 (사용 안 하면 "" 로 비워두기)
   flowerLink: "",
 
