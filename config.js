@@ -35,6 +35,8 @@ const CONFIG = {
     "images/gallery1.jpg?v=202611180952", "images/gallery2.jpg?v=202611180952", "images/gallery3.jpg?v=202611180952", "images/gallery4.jpg?v=202611180952",
     "images/gallery5.jpg?v=202611180952", "images/gallery6.jpg?v=202611180952", "images/gallery7.jpg?v=202611180952", "images/gallery8.jpg?v=202611180952",
   ],
+  // 처음에 보여줄 사진 수 (나머지는 [사진 더보기]로 펼침, 3의 배수 추천)
+  galleryFirst: 9,
 
   venue: {
     name: "웨스턴베니비스신도림",

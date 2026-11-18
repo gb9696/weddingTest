@@ -38,23 +38,21 @@
     ${row(me, p.name, p.phone)}${row("아버지", p.father.name, p.father.phone)}${row("어머니", p.mother.name, p.mother.phone)}</div>`;
   $("contactList").innerHTML = group("신랑측", C.groom, "신랑") + group("신부측", C.bride, "신부");
 
-  /* 갤러리 */
-  const gal = $("gallery"), dots = $("dots");
+  /* 갤러리 (3열 바둑판, 누르면 크게 보기) */
+  const gal = $("gallery");
+  const FIRST = C.galleryFirst || 9;   // 처음에 보여줄 사진 수
   C.gallery.forEach((src, i) => {
     const f = document.createElement("figure");
+    if (i >= FIRST) f.className = "more";
     const img = document.createElement("img");
     img.src = src; img.loading = "lazy"; img.alt = `사진 ${i + 1}`;
     fallback(img);
-    img.onclick = () => openLB(i);
+    f.onclick = () => openLB(i);
     f.appendChild(img); gal.appendChild(f);
-    dots.appendChild(document.createElement("span"));
   });
-  const setDot = () => {
-    const w = gal.firstElementChild ? gal.firstElementChild.offsetWidth + 10 : 1;
-    const idx = Math.round(gal.scrollLeft / w);
-    [...dots.children].forEach((d, i) => d.classList.toggle("on", i === idx));
-  };
-  gal.addEventListener("scroll", setDot, { passive: true }); setDot();
+  if (C.gallery.length > FIRST) {
+    $("galMore").onclick = () => { gal.classList.add("all"); $("galMore").remove(); };
+  } else $("galMore").remove();
 
   /* 라이트박스 */
   let cur = 0;
