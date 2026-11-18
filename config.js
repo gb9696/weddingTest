@@ -30,10 +30,10 @@ const CONFIG = {
   heroDeco: false,
 
   // 사진 (images 폴더에 넣고 파일명 맞추기)
-  mainPhoto: "images/main.jpg",
+  mainPhoto: "images/main.jpg?v=202611180952",
   gallery: [
-    "images/gallery1.jpg", "images/gallery2.jpg", "images/gallery3.jpg", "images/gallery4.jpg",
-    "images/gallery5.jpg", "images/gallery6.jpg", "images/gallery7.jpg", "images/gallery8.jpg",
+    "images/gallery1.jpg?v=202611180952", "images/gallery2.jpg?v=202611180952", "images/gallery3.jpg?v=202611180952", "images/gallery4.jpg?v=202611180952",
+    "images/gallery5.jpg?v=202611180952", "images/gallery6.jpg?v=202611180952", "images/gallery7.jpg?v=202611180952", "images/gallery8.jpg?v=202611180952",
   ],
 
   venue: {
@@ -47,7 +47,7 @@ const CONFIG = {
     kakaoMap: "https://map.kakao.com/",
     tmap: "https://tmap.life/",
     // 지도 이미지(선택). 캡처한 약도를 images/map.jpg로 넣으면 표시됩니다
-    mapImage: "images/map.jpg",
+    mapImage: "images/map.jpg?v=202611180952",
     transport: [
       { title: "지하철", desc: "2호선 OO역 3번 출구 도보 5분" },
       { title: "버스", desc: "간선 000, 000 / 지선 0000\nOO웨딩홀 정류장 하차" },
