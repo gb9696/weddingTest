@@ -5,11 +5,11 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:wedding-2027220@wedding-two-blue.vercel.app
-DTSTAMP:20261123T135718Z
+DTSTAMP:20261123T140122Z
 DTSTART:20270220T021000Z
 DTEND:20270220T041000Z
 SUMMARY:박근범 ♥ 이지현 결혼식
-LOCATION:웨스턴베니비스 신도림점 7층 그레이스홀 (서울특별시 구로구 새말로 97 신도림테크노마트 7층)
+LOCATION:웨스턴베니비스 신도림 7층 그레이스홀 (서울특별시 구로구 새말로 97 신도림테크노마트 7층)
 DESCRIPTION:https://wedding-two-blue.vercel.app/
 BEGIN:VALARM
 TRIGGER:-P1D

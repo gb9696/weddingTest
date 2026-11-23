@@ -58,9 +58,9 @@ const CONFIG = {
   galleryFirst: 9,
 
   venue: {
-    name: "웨스턴베니비스 신도림점",
+    name: "웨스턴베니비스 신도림",
     brand: "웨스턴베니비스",
-    branch: "신도림점",
+    branch: "신도림",
     floor: "7층",
     hall: "그레이스홀",
     address: "서울특별시 구로구 새말로 97 신도림테크노마트 7층",
