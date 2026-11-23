@@ -290,6 +290,8 @@
         title: `${C.groom.name} ♡ ${C.bride.name} 결혼합니다`,
         description: `${year}년 ${month}월 ${day}일 ${DAYS[dow]}요일 ${timeKo}\n${V.name} ${V.floor || ""} ${V.hall}`,
         imageUrl: C.shareImage,
+        imageWidth: 1200,
+        imageHeight: 1800,
         link: { mobileWebUrl: url, webUrl: url },
       },
       buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: url, webUrl: url } }],
