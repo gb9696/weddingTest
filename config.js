@@ -27,10 +27,10 @@ const CONFIG = {
 
   // 메인 사진 위 노란 손글씨·하트 장식
   // 사진에 이미 글씨가 들어가 있다면 false로 바꾸세요
-  heroDeco: false,
+  heroDeco: true,
 
   // 사진 (images 폴더에 넣고 파일명 맞추기)
-  mainPhoto: "images/main.jpg?v=202611180952",
+  mainPhoto: "images/main.jpg?v=202611232322",
   gallery: [
     "images/gallery1.jpg?v=202611232208",
     "images/gallery2.jpg?v=202611232208",
