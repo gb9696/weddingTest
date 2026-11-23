@@ -16,8 +16,8 @@ const CONFIG = {
   bride: {
     name: "이지현",
     order: "장녀",
-    father: { name: "이경석", phone: "010-0000-0000" },
-    mother: { name: "김향신", phone: "010-0000-0000" },
+    father: { name: "이경석", phone: "010-3698-1988" },
+    mother: { name: "김향신", phone: "010-6345-5149" },
     phone: "010-0000-0000",
   },
 
@@ -87,8 +87,8 @@ const CONFIG = {
     ],
     bride: [
       { role: "신부", name: "이지현", bank: "카카오뱅크", number: "3333-00-0000000" },
-      { role: "신부 아버지", name: "이경석", bank: "하나은행", number: "000-000000-00000" },
-      { role: "신부 어머니", name: "김향신", bank: "농협", number: "000-0000-0000-00" },
+      { role: "신부 아버지", name: "이경석", bank: "농협", number: "178466-52-065372" },
+      { role: "신부 어머니", name: "김향신", bank: "농협", number: "979-12-188616" },
     ],
   },
 
