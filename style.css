@@ -48,7 +48,7 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 .s4 { left: 19%; top: 40.4%; width: 4.2%; --d: 4.35s; }
 .s5 { right: 11%; top: 45.2%; width: 3.5%; --d: 4.1s; }
 .s6 { right: 6%; top: 47.5%; width: 3%; --d: 4.25s; }
-.wave { left: 45%; top: 66.4%; width: 12%; fill: none; opacity: 1; }
+.wave { left: 46.5%; top: 64.6%; width: 12%; fill: none; opacity: 1; }
 .wave path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw 1.2s ease-out 4.5s forwards; }
 @keyframes heartPop { 0% { opacity: 0; scale: .2; } 100% { opacity: 1; scale: 1; } }
 @keyframes floaty { from { translate: 0 0; } to { translate: 0 -5px; } }
