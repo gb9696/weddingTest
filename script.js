@@ -22,7 +22,9 @@
   $("heroGroom").textContent = C.groom.name;
   $("heroBride").textContent = C.bride.name;
   $("heroWhen").innerHTML = `${year}.${month}.${day}.<br>${DAYS[dow]}요일<br>${hour}:${pad(minute)}`;
-  $("heroWhere").innerHTML = [V.name, V.floor, V.hall].filter(Boolean).join("<br>");
+  // 신도림점·7층은 헷갈리기 쉬워서 형광펜으로 강조
+  const hl = (t) => `<mark class="hl">${t}</mark>`;
+  $("heroWhere").innerHTML = `${V.brand}<br>${hl(V.branch)}<br>${hl(V.floor)} ${V.hall}`;
 
   /* 인사말 & 혼주 */
   $("greeting").textContent = C.greeting;
@@ -102,7 +104,13 @@
   tick(); setInterval(tick, 1000);
 
   /* 오시는 길 */
-  $("venueName").textContent = [V.name, V.floor, V.hall].filter(Boolean).join(" ");
+  $("venueName").innerHTML = `${V.brand} ${hl(V.branch)}<br>${hl(V.floor)} ${V.hall}`;
+  if (V.notice && V.notice.length) {
+    const box = document.createElement("div");
+    box.className = "venue-notice";
+    box.innerHTML = `<p class="vn-title">헷갈리지 않게 꼭 확인해 주세요</p>` + V.notice.map((t) => `<p>✓ ${t}</p>`).join("");
+    $("venueAddr").after(box);
+  }
   $("venueAddr").innerHTML = `${V.address}<br>Tel. <a href="tel:${V.tel}">${V.tel}</a>`;
   $("naverMap").href = V.naverMap; $("kakaoMap").href = V.kakaoMap; $("tmap").href = V.tmap;
   const mapBox = $("mapBox");
