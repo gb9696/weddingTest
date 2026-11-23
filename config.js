@@ -9,9 +9,9 @@ const CONFIG = {
   groom: {
     name: "박근범",
     order: "차남",
-    father: { name: "박무용", phone: "010-0000-0000" },
-    mother: { name: "이태순", phone: "010-0000-0000" },
-    phone: "010-0000-0000",
+    father: { name: "박무용", phone: "010-3539-3713" },
+    mother: { name: "이태순", phone: "010-5483-4114" },
+    phone: "010-4703-6115",
   },
   bride: {
     name: "이지현",
@@ -82,8 +82,8 @@ const CONFIG = {
   accounts: {
     groom: [
       { role: "신랑", name: "박근범", bank: "우리은행", number: "1002-762-431397" },
-      { role: "신랑 아버지", name: "박무용", bank: "국민은행", number: "000000-00-000000" },
-      { role: "신랑 어머니", name: "이태순", bank: "우리은행", number: "0000-000-000000" },
+      { role: "신랑 아버지", name: "박무용", bank: "농협", number: "352-0812-8577-53" },
+      { role: "신랑 어머니", name: "이태순", bank: "농협", number: "773-02-274152" },
     ],
     bride: [
       { role: "신부", name: "이지현", bank: "토스뱅크", number: "1001-1650-1485" },
