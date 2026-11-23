@@ -30,7 +30,7 @@ const CONFIG = {
   heroDeco: true,
 
   // 사진 (images 폴더에 넣고 파일명 맞추기)
-  mainPhoto: "images/main.jpg?v=202611232322",
+  mainPhoto: "images/main.jpg?v=202611232324",
   gallery: [
     "images/gallery1.jpg?v=202611232208",
     "images/gallery2.jpg?v=202611232208",
