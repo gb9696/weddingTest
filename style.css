@@ -27,7 +27,7 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; animation: zoom 2.4s ease-out both; }
 @keyframes zoom { from { transform: scale(1.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .hero-deco { position: absolute; inset: 0; pointer-events: none; }
-.hero-script { position: absolute; top: 7.3%; right: 4%; font-family: "Hurricane", cursive; color: var(--yellow); font-size: clamp(46px, 16.5vw, 70px); line-height: .92; text-align: right; transform: rotate(-9deg); text-shadow: 0 1px 6px rgba(0,0,0,.18); }
+.hero-script { position: absolute; top: 7.3%; right: 7%; font-family: "Hurricane", cursive; color: var(--yellow); font-size: clamp(44px, 15.5vw, 66px); line-height: .92; text-align: right; transform: rotate(-9deg); text-shadow: 0 1px 6px rgba(0,0,0,.18); }
 /* 손글씨가 왼쪽부터 써지듯 한 줄씩 나타남 */
 .hero-script span { display: block; clip-path: inset(-25% 105% -25% -10%); animation: write 1s cubic-bezier(.55,.1,.35,1) forwards; }
 .hero-script span:nth-child(1) { animation-delay: .7s; }
