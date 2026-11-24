@@ -1,5 +1,6 @@
 {
   "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, noimageindex" }] },
     { "source": "/(.*)\\.ics", "headers": [{ "key": "Content-Type", "value": "text/calendar; charset=utf-8" }] }
   ]
 }
