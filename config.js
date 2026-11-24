@@ -53,6 +53,10 @@ const CONFIG = {
     "images/gallery19.jpg?v=202611232208",
     "images/gallery20.jpg?v=202611232208",
     "images/gallery21.jpg?v=202611232208",
+    "images/gallery22.jpg?v=202611241310",
+    "images/gallery23.jpg?v=202611241310",
+    "images/gallery24.jpg?v=202611241310",
+    "images/gallery25.jpg?v=202611241310",
   ],
   // 처음에 보여줄 사진 수 (나머지는 [사진 더보기]로 펼침, 3의 배수 추천)
   galleryFirst: 9,
